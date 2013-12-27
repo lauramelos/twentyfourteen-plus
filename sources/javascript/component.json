@@ -1,0 +1,20 @@
+{
+  "name": "twentyfourteenplus",
+  "repo": "pinkturtle/twentyfourteenplus",
+  "description": "JS core for TwentyFourTeen Plus WP theme",
+  "version": "1.0.0",
+  "keywords": ["theme", "twentyfourteenplus"],
+  "dependencies": {
+    "component/dom": "0.9.0",
+    "component/inherit": "0.0.2"
+  },
+  "development": {
+  },
+  "scripts": [
+    "index.js"
+  ],
+  "styles": [
+  ],
+  "license": "MIT",
+  "main": "index.js"
+}
