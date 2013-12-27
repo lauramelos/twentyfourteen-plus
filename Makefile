@@ -14,6 +14,9 @@ init:
 
 ftp-deploy:
 	clear
-	bash util/ftp-push.sh
+
+ftp-deploy-js:
+	clear
+	bash util/ftp-push-js.sh
 
 .PHONY: css ftp-deploy
