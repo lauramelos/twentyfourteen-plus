@@ -14,6 +14,7 @@ init:
 
 ftp-deploy:
 	clear
+	bash util/ftp-push.sh
 
 ftp-deploy-js:
 	clear
