@@ -1,2 +1,2 @@
-=Twenty Fourteen Plus
+= Twenty Fourteen Plus
 ---------------------
