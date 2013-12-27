@@ -1,4 +1,9 @@
 
+js:
+	clear
+	cd sources/javascript/ ; make
+	cp sources/javascript/build/build.js theme/core.js
+
 css:
 	cp sources/style/components/necolas-normalize.css/normalize.css sources/style/deps/normalize.styl
 	stylus sources/style/style.styl -o theme/
