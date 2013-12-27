@@ -4,6 +4,7 @@ css:
 
 init:
 	cd sources/style; npm install nib
+	cd sources/style; component install necolas/normalize.css
 
 ftp-deploy:
 	clear
