@@ -1,5 +1,4 @@
 # Twenty Fourteen Plus
-----------------------
 
 Child theme of Twenty Fourteen theme
 
@@ -30,7 +29,7 @@ make js
 ## License
 
   (The MIT License)
-  Copyright(c) 2013 Laura Melo &lt;lauramelos@gmail.com&gt; Damian Suarez &lt;rdsuarez@gmail.com&gt;
+  Copyright(c) 2013 Laura Melo &lt;lauramelos@gmail.com&gt; - Damian Suarez &lt;rdsuarez@gmail.com&gt;
   
   Permission is hereby granted, free of charge, to any person obtaining
   a copy of this software and associated documentation files (the
