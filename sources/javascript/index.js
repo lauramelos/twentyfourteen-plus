@@ -5,6 +5,7 @@
 
 var page = require('page');
 var o = require('jquery');
+var req = require('superagent');
 var debug = require('debug')('TFP');
 
 /**
@@ -38,13 +39,13 @@ function TFP(){
 TFP.prototype.init = function(){
   // get DOM elements reference
   this.els = {
-    body: o('body')
+    body: o('body'),
+    primary: o('#primary')
   };
 
   // configure object
   this.config = this.els.body.data('config');
 };
-
 
 /**
  * Declare routes client-side
@@ -67,9 +68,20 @@ TFP.prototype.router = function(){
     r = root + ('/' == r[0] ? r : '/' + r);
 
     debug ('add `%s` route', r);
-    page(r, function(ctx, next){
-    });
   }
+
+  var self = this;
+  page('*', function(ctx, next){
+    if (ctx.init) return next();
+    req
+    .get(ctx.path)
+    .set('X-Requested-With', 'XMLHttpRequest')
+    .end(function(res){
+      if (res.ok) {
+        self.els.primary.html(res.text);
+      }
+    });
+  });
 
   // add archive route
   debug ('add archive route');
