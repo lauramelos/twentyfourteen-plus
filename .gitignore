@@ -1,5 +1,8 @@
-theme/style.css
-node_modules
+.init
+build
 components
 npm-debug.log
+node_modules
+theme/style.css
+theme/core.js
 sources/style/deps/normalize.styl
