@@ -5,6 +5,7 @@
 
 var page = require('page');
 var o = require('jquery');
+var debug = require('debug')('TFP');
 
 /**
  * Expose `core`
@@ -18,8 +19,8 @@ module.exports = TFP;
  */
 
 function TFP(){
-  console.log('EPA !!');
   if (!(this instanceof TFP)) return new TFP();
+  debug('Twentyfourteen plus is starting ...');
 
   // init
   this.init();
@@ -58,21 +59,25 @@ TFP.prototype.router = function(){
   for (var k in this.config.permalink){
     var v = this.config.permalink[k];
     var r = v.replace(/%([a-z0-9-]*)%/g, ':$1');
-    r = root + ('/' == r[0] ? r : '/' + r);
 
     if ('category' == k || 'tag' == k) {
       r += '/:' + k;
     }
 
+    r = root + ('/' == r[0] ? r : '/' + r);
+
+    debug ('add `%s` route', r);
     page(r, function(ctx, next){
     });
   }
 
   // add archive route
+  debug ('add archive route');
   page(root + '/:year/:month', function(ctx, next){
   });
 
   // default
+  debug ('add default route');
   page(root + '/:postname', function(ctx, next){
   });
 
