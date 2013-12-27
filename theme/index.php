@@ -1,3 +1,4 @@
+<?php if (!isAjax()) : ?>
 <?php
 /**
  * The main template file
@@ -26,6 +27,8 @@ get_header(); ?>
 ?>
 
 	<div id="primary" class="content-area">
+<?php endif; ?>
+
 		<div id="content" class="site-content" role="main">
 
 		<?php
@@ -52,6 +55,8 @@ get_header(); ?>
 		?>
 
 		</div><!-- #content -->
+
+<?php if (!isAjax()) : ?>
 	</div><!-- #primary -->
 	<?php get_sidebar( 'content' ); ?>
 </div><!-- #main-content -->
@@ -59,3 +64,5 @@ get_header(); ?>
 <?php
 get_sidebar();
 get_footer();
+?>
+<?php endif; ?>
