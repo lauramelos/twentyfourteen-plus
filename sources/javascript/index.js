@@ -24,7 +24,7 @@ function TFP(){
   // init
   this.init();
 
-  // page
+  // Init client-side routing
   routing();
 };
 
@@ -37,8 +37,7 @@ function TFP(){
 TFP.prototype.init = function(){
   // get DOM elements reference
   this.els = {
-    body: o('body'),
-    primary: o('#primary')
+    body: o('body')
   };
 
   // configure object
