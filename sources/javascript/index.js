@@ -83,4 +83,9 @@ TFP.prototype.router = function(){
 TFP.prototype.markup = function(html, el){
   el = el ? o(el) : this.els.primary;
   el.html(html);
+
+  var y = el.position().top;
+  this.els.body.animate({
+    scrollTop: y
+  }, 0);
 };
