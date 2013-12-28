@@ -3,9 +3,8 @@
  * Components dependencies
  */
 
-var page = require('page');
 var o = require('jquery');
-var req = require('superagent');
+var routing = require('./routing');
 var debug = require('debug')('TFP');
 
 /**
@@ -26,7 +25,7 @@ function TFP(){
   this.init();
 
   // page
-  this.router();
+  routing();
 };
 
 /**
@@ -45,47 +44,4 @@ TFP.prototype.init = function(){
   // configure object
   this.config = this.els.body.data('config');
   this.els.body.removeAttr('data-config');
-};
-
-/**
- * Declare routes client-side
- *
- * @api private
- */
-
-TFP.prototype.router = function(){
-  var self = this;
-  page('*', function(ctx, next){
-    if (ctx.init) return next();
-
-    req
-    .get(ctx.path)
-    .set('X-Requested-With', 'XMLHttpRequest')
-    .end(function(res){
-      if (res.ok) {
-        self.markup(res.text);
-      }
-    });
-  });
-
-  page();
-};
-
-/**
- * Print async markup response
- * 
- * @param {String} html
- * @param {String|jQuery} el
- *
- * @api private
- */
-
-TFP.prototype.markup = function(html, el){
-  el = el ? o(el) : this.els.primary;
-  el.html(html);
-
-  var y = el.position().top;
-  this.els.body.animate({
-    scrollTop: y
-  }, 0);
 };

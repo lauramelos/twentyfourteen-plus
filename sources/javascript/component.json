@@ -13,7 +13,8 @@
   "development": {
   },
   "scripts": [
-    "index.js"
+    "index.js",
+    "routing.js"
   ],
   "styles": [
   ],
