@@ -14,7 +14,6 @@ var debug = require('debug')('TFP');
 
 module.exports = TFP;
 
-
 /**
  * Twentyfourteen plus component
  */
@@ -45,6 +44,7 @@ TFP.prototype.init = function(){
 
   // configure object
   this.config = this.els.body.data('config');
+  this.els.body.removeAttr('data-config');
 };
 
 /**
