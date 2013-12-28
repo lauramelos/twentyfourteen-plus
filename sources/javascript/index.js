@@ -57,15 +57,30 @@ TFP.prototype.router = function(){
   var self = this;
   page('*', function(ctx, next){
     if (ctx.init) return next();
+
     req
     .get(ctx.path)
     .set('X-Requested-With', 'XMLHttpRequest')
     .end(function(res){
       if (res.ok) {
-        self.els.primary.html(res.text);
+        self.markup(res.text);
       }
     });
   });
 
   page();
+};
+
+/**
+ * Print async markup response
+ * 
+ * @param {String} html
+ * @param {String|jQuery} el
+ *
+ * @api private
+ */
+
+TFP.prototype.markup = function(html, el){
+  el = el ? o(el) : this.els.primary;
+  el.html(html);
 };
