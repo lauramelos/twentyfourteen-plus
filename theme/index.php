@@ -26,9 +26,8 @@ get_header(); ?>
 	}
 ?>
 
-	<div id="primary" class="content-area">
 <?php endif; ?>
-
+	<div id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
 
 		<?php
@@ -56,9 +55,11 @@ get_header(); ?>
 
 		</div><!-- #content -->
 
-<?php if (!isAjax()) : ?>
 	</div><!-- #primary -->
+<?php if (!isAjax()) : ?>
+
 	<?php get_sidebar( 'content' ); ?>
+
 </div><!-- #main-content -->
 
 <?php

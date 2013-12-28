@@ -21,9 +21,9 @@
 
 get_header(); ?>
 
-	<section id="primary" class="content-area">
 <?php endif; ?>
 
+	<section id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
 
 			<?php if ( have_posts() ) : ?>
@@ -71,8 +71,8 @@ get_header(); ?>
 			?>
 		</div><!-- #content -->
 
-<?php if (!isAjax()) : ?>
 	</section><!-- #primary -->
+<?php if (!isAjax()) : ?>
 
 <?php
 get_sidebar( 'content' );

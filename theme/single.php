@@ -10,10 +10,9 @@
  */
 
 get_header(); ?>
-
-	<div id="primary" class="content-area">
 <?php endif; ?>
 
+	<div id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
 			<?php
 				// Start the Loop.
@@ -36,8 +35,8 @@ get_header(); ?>
 				endwhile;
 			?>
 		</div><!-- #content -->
-<?php if (!isAjax()) : ?>
 	</div><!-- #primary -->
+<?php if (!isAjax()) : ?>
 
 <?php
 get_sidebar( 'content' );

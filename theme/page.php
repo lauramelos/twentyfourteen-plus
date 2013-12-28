@@ -23,9 +23,9 @@ get_header(); ?>
 		get_template_part( 'featured-content' );
 	}
 ?>
-	<div id="primary" class="content-area">
 <?php endif; ?>
 
+	<div id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
 
 			<?php
@@ -43,9 +43,9 @@ get_header(); ?>
 			?>
 
 		</div><!-- #content -->
+	</div><!-- #primary -->
 <?php if (!isAjax()) : ?>
 
-	</div><!-- #primary -->
 	<?php get_sidebar( 'content' ); ?>
 </div><!-- #main-content -->
 
