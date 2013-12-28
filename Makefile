@@ -20,4 +20,8 @@ ftp-deploy-js:
 	clear
 	bash util/ftp-push-js.sh
 
+ftp-deploy-css:
+	clear
+	bash util/ftp-push-css.sh
+
 .PHONY: css ftp-deploy
