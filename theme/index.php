@@ -1,4 +1,5 @@
 <?php if (!isAjax()) : ?>
+
 <?php
 /**
  * The main template file
@@ -15,55 +16,58 @@
  * @since Twenty Fourteen 1.0
  */
 
-get_header(); ?>
-
-<div id="main-content" class="main-content">
-
-<?php
-	if ( is_front_page() && twentyfourteen_has_featured_posts() ) {
-		// Include the featured content template.
-		get_template_part( 'featured-content' );
-	}
+get_template_part('head', 'head');
 ?>
 
-<?php endif; ?>
-	<div id="primary" class="content-area">
-		<div id="content" class="site-content" role="main">
+<body <?php body_class(); ?> data-config='<?php echo json_encode($config); ?>'>
+  <div id="page" class="hfeed site">
+    <?php get_header(); ?>
 
-		<?php
-			if ( have_posts() ) :
-				// Start the Loop.
-				while ( have_posts() ) : the_post();
+    <div id="main" class="site-main">
+      <div id="main-content" class="main-content">
+      <?php
+        if ( is_front_page() && twentyfourteen_has_featured_posts() ) {
+          // Include the featured content template.
+          get_template_part( 'featured-content' );
+        }
+      ?>
+      <?php endif; ?>
 
-					/*
-					 * Include the post format-specific template for the content. If you want to
-					 * use this in a child theme, then include a file called called content-___.php
-					 * (where ___ is the post format) and that will be used instead.
-					 */
-					get_template_part( 'content', get_post_format() );
+        <div id="primary" class="content-area">
+          <div id="content" class="site-content" role="main">
+          <?php
+            if ( have_posts() ) :
+              // Start the Loop.
+              while ( have_posts() ) : the_post();
 
-				endwhile;
-				// Previous/next post navigation.
-				twentyfourteen_paging_nav();
+                /*
+                 * Include the post format-specific template for the content. If you want to
+                 * use this in a child theme, then include a file called called content-___.php
+                 * (where ___ is the post format) and that will be used instead.
+                 */
+                get_template_part( 'content', get_post_format() );
 
-			else :
-				// If no content, include the "No posts found" template.
-				get_template_part( 'content', 'none' );
+              endwhile;
+              // Previous/next post navigation.
+              twentyfourteen_paging_nav();
 
-			endif;
-		?>
+            else :
+              // If no content, include the "No posts found" template.
+              get_template_part( 'content', 'none' );
 
-		</div><!-- #content -->
+            endif;
+          ?>
+          </div><!-- #content -->
 
-	</div><!-- #primary -->
-<?php if (!isAjax()) : ?>
+        </div><!-- #primary -->
+      <?php if (!isAjax()) : ?>
+      <?php get_sidebar( 'content' ); ?>
+      </div><!-- #main-content -->
 
-	<?php get_sidebar( 'content' ); ?>
+      <div id="secondary"></div>
+      </div><!-- #main -->
 
-</div><!-- #main-content -->
-
-<?php
-get_sidebar();
-get_footer();
-?>
-<?php endif; ?>
+      <footer id="colophon" class="site-footer" role="contentinfo"></footer>
+	    <?php wp_footer(); ?>
+    </div><!-- #page -->
+  <?php endif; ?>
