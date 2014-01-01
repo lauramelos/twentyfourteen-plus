@@ -9,6 +9,15 @@ var req = require('superagent');
 var debug = require('debug')('TFP:routing');
 
 /**
+ * Load complete sections
+ */
+
+var sections = {
+  sidebar: { tpl: 'sidebar', role: 'sidebar' },
+  footer: { tpl: 'footer', role: 'footer' }
+};
+
+/**
  * Set routes client-side
  *
  * @api private
@@ -18,7 +27,7 @@ module.exports = function(){
   var body = o('body');
 
   page('*', function(ctx, next){
-    if (ctx.init) return next();
+    if (ctx.init) return complete();
 
     req
     .get(ctx.path)
@@ -43,9 +52,15 @@ module.exports = function(){
   function print(html){
     var wrap = o('<div>', { html: html }).children();
     var id = wrap.attr('id');
-    debug('detected id: `%s`', id);
 
-    var container = body.find('#' + id);
+    var selector = '#' + id;
+    var container = body.find(selector);
+
+    if (!container.length) {
+      return debug('WARNING: `%s` element doesn\'t detected', selector);
+    } else {
+      debug('detected : `%s` element', selector);
+    }
 
     container
     .empty()
@@ -53,4 +68,21 @@ module.exports = function(){
 
     body.animate({ scrollTop: 0 }, 0);
   };
+
+  function complete(){
+    for (var k in sections) {
+      var data = sections[k];
+      data.action = 'load_section';
+
+      debug('loading `%s` section', k);
+
+      req
+      .get('/wpwork/wp-admin/admin-ajax.php')
+      .query(data)
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .end(function(res){
+        print(res.text);
+      });
+    }
+  }
 };
