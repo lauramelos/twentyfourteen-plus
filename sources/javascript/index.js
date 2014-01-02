@@ -15,6 +15,7 @@ module.exports = TFP;
 
 /**
  * Twentyfourteen plus component
+ * @param {String} name description
  */
 
 function TFP(){
