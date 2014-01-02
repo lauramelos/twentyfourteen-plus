@@ -6,6 +6,7 @@
 var page = require('page');
 var o = require('jquery');
 var req = require('superagent');
+var conf = require('./config')();
 var debug = require('debug')('TFP:routing');
 
 /**
@@ -77,7 +78,7 @@ module.exports = function(){
       debug('loading `%s` section', k);
 
       req
-      .get('/wpwork/wp-admin/admin-ajax.php')
+      .get(conf.async_path + '/wp-admin/admin-ajax.php')
       .query(data)
       .set('X-Requested-With', 'XMLHttpRequest')
       .end(function(res){
