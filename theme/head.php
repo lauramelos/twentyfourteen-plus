@@ -36,6 +36,7 @@
         'category' => get_option( 'category_base' ),
         'tag' => get_option( 'tag_base' )
       ),
+      'current_template' => get_current_theme_tpl(),
       'hostname' => $_SERVER['SERVER_NAME']
     );
 
