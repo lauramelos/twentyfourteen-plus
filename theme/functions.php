@@ -60,11 +60,11 @@ add_action( 'wp_enqueue_scripts', 'theme_scripts' );
 add_action( 'wp_ajax_load_section', 'load_section');
 add_filter( 'template_include', 'template_switcher', 1000 );
 
-
 /**
  * Return the current theme template
  */
 
 function get_current_theme_tpl(){
   return $GLOBALS['current_theme_template'];
+}
 ?>
