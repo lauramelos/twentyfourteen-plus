@@ -78,7 +78,7 @@ module.exports = function(){
       debug('loading `%s` section', k);
 
       req
-      .get(conf.async_path + '/wp-admin/admin-ajax.php')
+      .get(conf.subpath + '/wp-admin/admin-ajax.php')
       .query(data)
       .set('X-Requested-With', 'XMLHttpRequest')
       .end(function(res){
