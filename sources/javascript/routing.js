@@ -14,8 +14,21 @@ var debug = require('debug')('TFP:routing');
  */
 
 var sections = {
-  sidebar: { tpl: 'sidebar', role: 'sidebar' },
-  footer: { tpl: 'footer', role: 'footer' }
+  "sidebar": {
+    tpl: 'sidebar',
+    role: 'sidebar',
+    selector: '#secondary'
+  },
+  "sidebar-content":  {
+    tpl: 'sidebar-content',
+    role: 'sidebar-content',
+    selector: '#content-sidebar'
+  },
+  "footer": {
+    tpl: 'footer',
+    role: 'footer',
+    selector: '#colophon'
+  }
 };
 
 /**
@@ -28,7 +41,7 @@ module.exports = function(){
   var body = o('body');
 
   page('*', function(ctx, next){
-    if (ctx.init) return complete();
+    if (ctx.init) return load_sections();
 
     req
     .get(ctx.path)
@@ -70,20 +83,27 @@ module.exports = function(){
     body.animate({ scrollTop: 0 }, 0);
   };
 
-  function complete(){
+  function load_sections(){
     for (var k in sections) {
       var data = sections[k];
-      data.action = 'load_section';
+      //
+      // check if the placeholder element exists
+      if (o(data.selector).length) {
 
-      debug('loading `%s` section', k);
+        data.action = 'load_section';
 
-      req
-      .get(conf.subpath + '/wp-admin/admin-ajax.php')
-      .query(data)
-      .set('X-Requested-With', 'XMLHttpRequest')
-      .end(function(res){
-        print(res.text);
-      });
+        debug('loading `%s` section', k);
+
+        req
+        .get(conf.subpath + '/wp-admin/admin-ajax.php')
+        .query(data)
+        .set('X-Requested-With', 'XMLHttpRequest')
+        .end(function(res){
+          print(res.text);
+        });
+      } else {
+        debug('WARNING: element `%s` has not been found', data.selector);
+      }
     }
   }
 };
