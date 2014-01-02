@@ -21,7 +21,7 @@ get_template_part('head', 'head');
         <?php if ( is_front_page() && twentyfourteen_has_featured_posts() ) : ?>
           <div id="featured-content" class="featured-content">
           </div><!-- #featured-content .featured-content -->
-          <?php endif; ?>
+        <?php endif; ?>
 
         <div id="primary" class="content-area">
           <?php get_template_part('./partials/' . get_current_theme_tpl()) ?>
