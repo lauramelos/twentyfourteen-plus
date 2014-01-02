@@ -37,7 +37,7 @@ module.exports = function(){
   var conf = config[env];
   conf.env = env;
 
-  // for prod hostname is getted from main configurarion global var (head.php)
+  // for prod hostname is gotten from main configurarion global var (head.php)
   conf.hostname = main_config.hostname;
   debug('hostname under `%s`: `%s`', conf.env, conf.hostname);
 

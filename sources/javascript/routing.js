@@ -81,9 +81,9 @@ module.exports = function(){
     var container = body.find(selector);
 
     if (!container.length) {
-      return debug('WARNING: `%s` element doesn\'t detected', selector);
+      return debug('WARNING: [%s] element doesn\'t detected', selector);
     } else {
-      debug('detected : `%s` element', selector);
+      debug('detected [%s] element', selector);
     }
 
     container
@@ -96,13 +96,11 @@ module.exports = function(){
   function load_sections(){
     for (var k in sections) {
       var data = sections[k];
-      //
       // check if the placeholder element exists
       if (o(data.selector).length) {
-
         data.action = 'load_section';
 
-        debug('loading `%s` section', k);
+        debug('loading [%s] section', k);
 
         req
         .get(conf.subpath + '/wp-admin/admin-ajax.php')
@@ -112,7 +110,7 @@ module.exports = function(){
           print(res.text);
         });
       } else {
-        debug('WARNING: element `%s` has not been found', data.selector);
+        debug('WARNING: element [%s] has not been found', data.selector);
       }
     }
   }
