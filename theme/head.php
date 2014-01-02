@@ -29,7 +29,21 @@
   <![endif]-->
   <?php wp_head(); ?>
 
+  <?php
+    $config = array(
+      'permalink' => array(
+        'structure' => get_option( 'permalink_structure' ),
+        'category' => get_option( 'category_base' ),
+        'tag' => get_option( 'tag_base' )
+      ),
+      'hostname' => $_SERVER['SERVER_NAME']
+    );
+
+    $config = json_encode($config);
+  ?>
+
   <script>
+    var main_config = <?php echo $config; ?>;
     // Start core component
     jQuery(window).ready(require('twentyfourteenplus'));
   </script>
