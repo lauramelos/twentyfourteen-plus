@@ -29,7 +29,6 @@ function isAjax(){
  */
 
 function load_section() {
-  global $wpdb;
   $tpl = $_GET['tpl'];
   $role = $_GET['role'];
   get_template_part($tpl, $role);
@@ -57,8 +56,8 @@ function template_switcher($tpl) {
 
 // Adding hooks
 add_action( 'wp_enqueue_scripts', 'theme_scripts' );
-add_action( 'wp_ajax_load_section', 'load_section');
 add_filter( 'template_include', 'template_switcher', 1000 );
+add_action( 'wp_ajax_nopriv_load_section', 'load_section');
 
 /**
  * Return the current theme template
