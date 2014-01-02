@@ -19,6 +19,11 @@ var sections = {
     role: 'sidebar',
     selector: '#secondary'
   },
+  "header":  {
+    tpl: 'header',
+    role: 'header',
+    selector: '#masthead'
+  },
   "sidebar-content":  {
     tpl: 'sidebar-content',
     role: 'sidebar-content',
