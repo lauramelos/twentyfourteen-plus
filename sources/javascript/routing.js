@@ -24,6 +24,11 @@ var sections = {
     role: 'sidebar-content',
     selector: '#content-sidebar'
   },
+  "featured-content":  {
+    tpl: 'featured-content',
+    role: 'featured-content',
+    selector: '#featured-content'
+  },
   "footer": {
     tpl: 'footer',
     role: 'footer',

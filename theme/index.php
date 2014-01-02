@@ -18,10 +18,10 @@ get_template_part('head', 'head');
 
     <div id="main" class="site-main">
       <div id="main-content" class="main-content">
-        <?php if ( is_front_page() && twentyfourteen_has_featured_posts() ) {
-          // Include the featured content template.
-          //get_template_part( 'featured-content' );
-        } ?>
+        <?php if ( is_front_page() && twentyfourteen_has_featured_posts() ) : ?>
+          <div id="featured-content" class="featured-content">
+          </div><!-- #featured-content .featured-content -->
+          <?php endif; ?>
 
         <div id="primary" class="content-area">
           <?php get_template_part('./partials/' . get_current_theme_tpl()) ?>
