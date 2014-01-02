@@ -9,11 +9,14 @@ var debug = require('debug')('TFP:config');
  * Configuration object
  */
 
-var config = {};
+var config = {
+  "dev": {
+    "hostname": "localhost"
+  },
 
-/**
- * Main configuration (Global var)
- */
+  "prod": {
+  }
+};
 
 var host = main_config.hostname;
 
@@ -24,12 +27,17 @@ var host = main_config.hostname;
  */
 
 module.exports = function(){
-  var env = 'localhost' == host ? 'dev' : 'prod';
+  var env = main_config.hostname == config.dev.hostname ? 'dev' : 'prod';
 
-  debug('Env: `%s`', env);
+  debug('Environment detected: `%s`', env);
 
-  config.env = env;
-  config.async_path = 'dev' == env ? '/wpwork' : '';
+  var conf = config[env];
+  conf.env = env;
+  conf.hostname = main_config.hostname;
 
-  return config;
+  debug('hostname under `%s`: `%s`', conf.env, conf.hostname);
+
+  conf.async_path = 'dev' == env ? '/wpwork' : '';
+
+  return conf;
 };
