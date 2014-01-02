@@ -27,3 +27,15 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 /* Normalize */
 @import 'sources/style/deps/normalize.styl'
+
+/* Vars */
+$backcolor = #021
+
+#secondary,
+.site-footer,
+.site-header
+  background-color: $backcolor
+
+@media screen and (min-width: 1008px)
+  .site:before
+    background-color: $backcolor
