@@ -57,6 +57,8 @@ function template_switcher($tpl) {
 // Adding hooks
 add_action( 'wp_enqueue_scripts', 'theme_scripts' );
 add_filter( 'template_include', 'template_switcher', 1000 );
+
+add_action( 'wp_ajax_load_section', 'load_section');
 add_action( 'wp_ajax_nopriv_load_section', 'load_section');
 
 /**
