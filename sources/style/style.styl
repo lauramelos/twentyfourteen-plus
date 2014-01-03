@@ -29,7 +29,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 @import 'sources/style/deps/normalize.styl'
 
 /* Vars */
-$bodybackcolor = #2f6
+$bodybackcolor = #042
 $backcolor = #021
 
 body
@@ -42,6 +42,16 @@ body
 
 .site-header
   height: 48px
+
+/* loader section animation */
+.load-section
+  opacity: 0
+
+.section-printed
+  opacity: 1
+  transition-property: opacity
+  transition-duration: 500ms
+  transition-timing-function: ease-in
 
 @media screen and (min-width: 1008px)
   .site:before
