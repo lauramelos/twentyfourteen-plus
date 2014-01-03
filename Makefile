@@ -13,15 +13,18 @@ init:
 	cd sources/style; component install necolas/normalize.css
 
 ftp-deploy:
-	clear
 	bash util/ftp-push.sh
 
 ftp-deploy-js:
-	clear
 	bash util/ftp-push-js.sh
 
 ftp-deploy-css:
-	clear
 	bash util/ftp-push-css.sh
 
-.PHONY: css ftp-deploy
+all:
+	clear
+	make css
+	make js
+	make ftp-deploy
+
+.PHONY: css ftp-deploy all
