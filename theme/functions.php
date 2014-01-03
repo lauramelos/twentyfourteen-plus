@@ -21,18 +21,12 @@ function isAjax(){
 }
 
 /**
- * Render an specific section using the given template
- * through an ajax request
- *
- * _GET var {string} tpl template name
- * _GET var {stron} role 
+ * Register partial_tpl query var
  */
 
-function load_section() {
-  $tpl = $_GET['tpl'];
-  $role = $_GET['role'];
-  get_template_part($tpl, $role);
-  die();
+function register_partial_tpl_query_var( $qvars ) {
+  $qvars[] = 'partial_tpl';
+  return $qvars;
 }
 
 /**
@@ -43,23 +37,33 @@ function load_section() {
 function template_switcher($tpl) {
   $base = basename($tpl);
   $dir = dirname($tpl);
+  $tpl_name = substr($base, 0, -4);
 
-  // set template name as global var
-  $GLOBALS['current_theme_template'] = substr($base, 0, -4);
+  // check partial template in the query string
+  $partial = get_query_var('partial_tpl');
+  if (!empty($partial)) {
+    $tpl_name = $partial;
+    $tpl = $dir . '/' . $partial . '.php';
 
-  if (isAjax()) {
-    return $dir . '/partials/' . $base;
+    // check if template exists
+    if (!file_exists($tpl)) {
+      $tpl = get_template_directory() . '/' . $partial . '.php';
+    }
+  } elseif (isAjax()) {
+    // ajax request ?
+    $tpl = $dir . '/partials/' . $base;
   }
+
+  // set tpl global var
+  $GLOBALS['current_theme_template'] = $tpl_name;
 
   return $tpl;
 }
 
 // Adding hooks
+add_filter('query_vars', 'register_partial_tpl_query_var' );
 add_action( 'wp_enqueue_scripts', 'theme_scripts' );
 add_filter( 'template_include', 'template_switcher', 1000 );
-
-add_action( 'wp_ajax_load_section', 'load_section');
-add_action( 'wp_ajax_nopriv_load_section', 'load_section');
 
 /**
  * Return the current theme template

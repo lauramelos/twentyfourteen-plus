@@ -19,27 +19,37 @@ var sections = {
     role: 'sidebar',
     selector: '#secondary'
   },
+
   "header":  {
     tpl: 'header',
     role: 'header',
     selector: '#masthead'
   },
+
   "sidebar-content":  {
     tpl: 'sidebar-content',
     role: 'sidebar-content',
     selector: '#content-sidebar'
   },
+
   "featured-content":  {
     tpl: 'featured-content',
     role: 'featured-content',
     selector: '#featured-content'
   },
+
   "footer": {
     tpl: 'footer',
     role: 'footer',
     selector: '#colophon'
   }
 };
+
+/**
+ * Current path
+ */
+
+var current_path;
 
 /**
  * Set routes client-side
@@ -51,7 +61,10 @@ module.exports = function(){
   var body = o('body');
 
   page('*', function(ctx, next){
+    current_path = ctx.path;
     if (ctx.init) return load_sections();
+
+    debug('loading [%s]', ctx.path);
 
     req
     .get(ctx.path)
@@ -88,7 +101,8 @@ module.exports = function(){
 
     container
     .empty()
-    .append(wrap.children());
+    .append(wrap.children())
+    .addClass('section-printed');
 
     body.animate({ scrollTop: 0 }, 0);
   };
@@ -97,21 +111,30 @@ module.exports = function(){
     for (var k in sections) {
       var data = sections[k];
       // check if the placeholder element exists
-      if (o(data.selector).length) {
+      var selector = o(data.selector);
+      if (selector.length) {
         data.action = 'load_section';
-
-        debug('loading [%s] section', k);
-
-        req
-        .get(conf.subpath + '/wp-admin/admin-ajax.php')
-        .query(data)
-        .set('X-Requested-With', 'XMLHttpRequest')
-        .end(function(res){
-          print(res.text);
-        });
+        selector.addClass('load-section');
+        request(k, data);
       } else {
         debug('WARNING: element [%s] has not been found', data.selector);
       }
     }
+  }
+
+  function request(k, data) {
+    var path = current_path + '?partial_tpl=' + data.tpl;
+    debug('loading [%s] path', path);
+    req
+    .get(path)
+    .set('X-Requested-With', 'XMLHttpRequest')
+    .end(function(res){
+      if (res.ok) {
+        print(res.text);
+      } else {
+        debug('Error loading [%s] section', k);
+      }
+    });
+     
   }
 };
