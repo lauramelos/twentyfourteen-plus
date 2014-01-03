@@ -1,56 +1,54 @@
-<?php if (!isAjax()) : ?>
-
 <?php
 /**
- * The template for displaying all pages
+ * The main template file
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages and that
- * other 'pages' on your WordPress site will use a different template.
+ * Main template
  *
  * @package WordPress
- * @subpackage Twenty_Fourteen
- * @since Twenty Fourteen 1.0
+ * @subpackage Twenty_Fourteen_Plus
+ * @since Twenty Fourteen Plus 1.0
  */
 
-get_header(); ?>
-
-<div id="main-content" class="main-content">
-
-<?php
-	if ( is_front_page() && twentyfourteen_has_featured_posts() ) {
-		// Include the featured content template.
-		get_template_part( 'featured-content' );
-	}
+get_template_part('head', 'head');
 ?>
-<?php endif; ?>
 
-	<div id="primary" class="content-area">
-		<div id="content" class="site-content" role="main">
+<body <?php body_class(); ?>>
+  <div id="page" class="hfeed site">
 
-			<?php
-				// Start the Loop.
-				while ( have_posts() ) : the_post();
+    <?php if ( get_header_image() ) : ?>
+    <div id="site-header">
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+        <img src="<?php header_image(); ?>" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="">
+      </a>
+    </div>
+    <?php endif; ?>
 
-					// Include the page content template.
-					get_template_part( 'content', 'page' );
+    <header id="masthead" class="site-header" role="banner">
+    </header><!-- #masthead -->
 
-					// If comments are open or we have at least one comment, load up the comment template.
-					if ( comments_open() || get_comments_number() ) {
-						comments_template();
-					}
-				endwhile;
-			?>
+    <div id="main" class="site-main">
+      <div id="main-content" class="main-content">
+        <?php if ( is_front_page() && twentyfourteen_has_featured_posts() ) : ?>
+          <div id="featured-content" class="featured-content">
+          </div><!-- #featured-content .featured-content -->
+        <?php endif; ?>
 
-		</div><!-- #content -->
-	</div><!-- #primary -->
-<?php if (!isAjax()) : ?>
+        <div id="primary" class="content-area">
+          <?php get_template_part('./partials/' . get_current_theme_tpl()) ?>
+        </div><!-- #primary -->
 
-	<?php get_sidebar( 'content' ); ?>
-</div><!-- #main-content -->
+        <?php if (is_active_sidebar( 'sidebar-2' ) ) : ?>
+          <div id="content-sidebar" class="content-sidebar widget-area" role="complementary">
+          </div><!-- #content-sidebar -->
+        <?php endif; ?>
 
-<?php
-get_sidebar();
-get_footer();
-?>
-<?php endif; ?>
+      </div><!-- #main-content -->
+
+      <div id="secondary"></div>
+
+    </div><!-- #main -->
+
+    <footer id="colophon" class="site-footer" role="contentinfo"></footer>
+	  <?php wp_footer(); ?>
+  </div><!-- #page -->
+</body>
